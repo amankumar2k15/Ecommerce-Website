@@ -17,7 +17,7 @@ const CartItem = ({ item }) => {
                         className="text-primeColor hover:text-red-500 duration-300 cursor-pointer"
                     />
                 </div>
-                <img className="w-32 h-32" src={`${SERVER_URL}/${item?.avatar.replace(/\\/g, '/')}`} alt="productImage" />
+                <img className="w-32 h-32" src={`${SERVER_URL}/${item?.avatar?.replace(/\\/g, '/')}`} alt="productImage" />
                 <h1 className="font-titleFont font-semibold">{item.name}</h1>
             </div>
             <div className="col-span-5 mdl:col-span-3 flex items-center justify-between py-4 mdl:py-0 px-4 mdl:px-0 gap-6 mdl:gap-0">

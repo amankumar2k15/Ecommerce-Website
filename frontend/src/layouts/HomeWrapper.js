@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import PrivateRoutes from '../Routes/Routes';
+import PrivateRoutes from '../Routes/PrivateRoutes';
 import Navbar from "../components/Nabvar&Header/Navbar"
 import { Route, Routes } from 'react-router-dom';
 import Admin from '../pages/Admin/Admin';

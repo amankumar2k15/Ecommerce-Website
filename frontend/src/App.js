@@ -23,9 +23,9 @@ const App = () => {
       <ToastContainer position='top-right' newestOnTop={true} autoClose={1500} />
 
       {isHomeRoute ?
-        <LoginWrapper />
-        :
         <HomeWrapper />
+        :
+        <LoginWrapper />
       }
     </>
   )
