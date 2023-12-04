@@ -4,7 +4,6 @@ import { RiLockPasswordFill } from "react-icons/ri"
 import LoginRegisterLeftSection from "./LoginRegisterLeftSection";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai"
 import { FiMail } from "react-icons/fi"
-import { toast } from 'react-toastify'
 import Toast from "../../common/Toast"
 import axios from "axios";
 import { SERVER_URL } from "../../constants";
@@ -30,17 +29,22 @@ const SignIn = () => {
     }
   }
 
-
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
     if (validation().isError) {
       try {
-        const res = await axios.post(`${SERVER_URL}/user/login`)
-        const data = await res.data
-        console.log(data)
-
+        const res = await axios.post(`${SERVER_URL}/user/login`, credentials)
+        if (res) {
+          setCredentials({
+            email: "",
+            password: ""
+          })
+          Toast(false, res.data.message)
+          navigate("/")
+        }
       } catch (err) {
         console.log(err)
-        Toast(true, "err coming")
+        Toast(true, err.response.data.message)
       }
 
     } else {
@@ -56,7 +60,6 @@ const SignIn = () => {
 
       {/* -----------------------------------------RightSection----------------------------------------- */}
       <div className="w-full md:w-1/2 px-5 md:px-5">
-
         <form className="w-full lgl:w-[450px] h-screen flex flex-col items-center justify-center">
           <div className="text-center mb-10">
             <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-4xl  mb-4">Sign in</h1>
@@ -65,6 +68,7 @@ const SignIn = () => {
 
           <div className=" w-[300px] sm:w-[340px]">
 
+            {/* Email */}
             <div className="flex -mx-3">
               <div className="w-full px-3 mb-5">
                 <label htmlFor="" className="font-titleFont text-base font-semibold text-gray-600">Email</label>
@@ -80,6 +84,9 @@ const SignIn = () => {
                 </div>
               </div>
             </div>
+
+
+            {/* Password */}
             <div className="flex -mx-3">
               <div className="w-full px-3 mb-12">
                 <label htmlFor="" className="font-titleFont text-base font-semibold text-gray-600">Password</label>

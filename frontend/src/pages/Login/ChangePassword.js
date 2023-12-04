@@ -4,13 +4,15 @@ import { RiLockPasswordFill } from "react-icons/ri"
 import LoginRegisterLeftSection from "./LoginRegisterLeftSection";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai"
 import { FiMail } from "react-icons/fi"
-import { toast } from 'react-toastify'
+import axios from "axios";
+import { SERVER_URL } from "../../constants";
+import Toast from "../../common/Toast";
 
 const SignIn = () => {
     const [hide, setHide] = useState(true)
     const navigate = useNavigate()
     const [credentials, setCredentials] = useState({
-        email: "",
+        email: JSON.parse(localStorage.getItem("email")),
         password: ""
     })
 
@@ -21,18 +23,26 @@ const SignIn = () => {
 
     const validation = () => {
         if (!credentials.email) return { isError: false, message: "Email is missing" }
-        else if (!credentials.otp) return { isError: false, message: "Password is missing" }
+        else if (!credentials.password) return { isError: false, message: "Password is missing" }
         else {
             return { isError: true }
         }
     }
 
 
-    const handleLogin = async () => {
+    const handleResetPassword = async (e) => {
+        e.preventDefault()
         if (validation().isError) {
-
+            try {
+                const res = await axios.post(`${SERVER_URL}/user/changePassword`, credentials)
+                Toast(false, res.data.message)
+                localStorage.removeItem("email")
+                navigate("/login")
+            } catch (err) {
+                Toast(true, err.response.data.message)
+            }
         } else {
-            toast.error(validation().message)
+            Toast(true, validation().message)
         }
     }
 
@@ -63,7 +73,7 @@ const SignIn = () => {
                                     <input type="email" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-gray-600 text-gray-900" placeholder="johnsmith@example.com"
                                         id='email'
                                         value={credentials.email}
-                                        onChange={handleInput}
+                                        disabled
                                     />
                                 </div>
                             </div>
@@ -95,9 +105,9 @@ const SignIn = () => {
                         <div className="flex -mx-3">
                             <div className="w-full px-3 mb-5">
                                 <button className="bg-primeColor hover:bg-black text-gray-200 hover:text-white cursor-pointer w-full text-base font-medium h-10 rounded-md  duration-300"
-                                    onClick={handleLogin}
+                                    onClick={handleResetPassword}
                                 >
-                                    Sign in
+                                    Reset Password
                                 </button>
                             </div>
                         </div>

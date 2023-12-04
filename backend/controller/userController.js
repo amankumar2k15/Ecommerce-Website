@@ -199,7 +199,6 @@ const changePassword = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "Email does not found" })
         }
-
         user.password = password
 
         const salt = bcrypt.genSaltSync(+(process.env.SALT_ROUND))

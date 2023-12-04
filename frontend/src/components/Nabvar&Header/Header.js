@@ -1,35 +1,52 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { FaGripLines, FaSearch, FaShoppingCart } from "react-icons/fa"
 import { BsPersonFillDown } from "react-icons/bs"
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, fetchProductsByCategory, searchProducts } from '../../store/productSlice'
+import { fetchProducts, fetchProductsByCategory, searchProducts, selectProduct } from '../../store/productSlice'
+import { SERVER_URL } from '../../constants'
+
+
+const menuItems = ["Accessories", "Home Appliances", "Clothes", "Electronics", "Jewellery", "All"]
 
 
 const Header = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [searchQuery, setSearchQuery] = useState("")
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [showSearchBar, setShowSearchBar] = useState(false);
+
+    //framer motion details box
     const [details1, setDetails1] = useState(false)
     const [details2, setDetails2] = useState(false)
 
+    //redux-toolkit
     const product = useSelector((state) => state.cart.items)
+    const reduxStoreProduct = useSelector((state) => state.product.data.result)
 
-    const menuItems = [
-        { title: "Accessories", },
-        { title: "Home Appliances" },
-        { title: "Clothes" },
-        { title: "Electronics" },
-        { title: "Jewellery", },
-        { title: "All", },
 
-    ]
+    useEffect(() => {
+        const filtered = reduxStoreProduct?.filter((item) => {
+            return item?.categoryName?.toLowerCase().includes(searchQuery.toLowerCase());
+        })
+        setFilteredProducts(filtered)
+    }, [searchQuery])
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        dispatch(searchProducts(searchQuery))
-        setSearchQuery("")
+    // const handleSearchSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(searchProducts(searchQuery))
+    //     setSearchQuery("")
+    // }
+
+    const handleCategoryClick = (categoryName) => {
+        if (categoryName === "All") {
+            dispatch(fetchProducts())
+        } else {
+            dispatch(fetchProductsByCategory(categoryName))
+        }
     }
 
     return (
@@ -47,11 +64,10 @@ const Header = () => {
                             <ul className='flex bg-primeColor font-semibold text-md px-2 z-50 py-4 w-[220px] leading-tight flex-col gap-4 lg:text-base text-[#767676]'>
                                 {menuItems.map((item, index) => {
                                     return (
-                                        <li key={index} className='hover:border-b-[1px] px-4 text-md border-b-[1px] border-b-[#767676] hover:border-b-[#F0F0F0] pb-2  items-center gap-2  hover:border-gray-400 hover:text-white duration-300'
+                                        <li key={index} className='hover:border-b-[1px] px-4 text-md border-b-[1px] border-b-[#767676] cursor-pointer hover:border-b-[#F0F0F0] pb-2  items-center gap-2  hover:border-gray-400 hover:text-white duration-300'
+                                            onClick={() => handleCategoryClick(item)}
                                         >
-                                            <Link to="/shop">
-                                                {item.title}
-                                            </Link>
+                                            {item}
                                         </li>
                                     )
                                 })}
@@ -65,34 +81,59 @@ const Header = () => {
 
             {/*--------------------middle section start-------------- */}
             <div className='w-full sm:w-[650px]'>
-                <>
-                    {/* Hello world */}
-                    <form >
-                        <label htmlFor="default-search" className="mb-2 text-sm font-medium text-black sr-only ">
-                            Search
-                        </label>
-                        <div className="relative">
-                            <input type="search" className="block w-full p-4 pl-10 text-sm rounded-lg border-none outline-none" placeholder="Search your products here"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            <button type="submit"
-                                className="text-black absolute right-2.5 bottom-2.5 0 font-medium rounded-lg text-sm px-4 py-2 "
-                                onClick={handleSearchSubmit}
+                {/* Hello world */}
+                <form >
+                    <label htmlFor="default-search" className="mb-2 text-sm font-medium text-black sr-only ">
+                        Search
+                    </label>
+                    <div className="relative">
+                        <input type="text" className="block w-full p-4 pl-10 text-sm rounded-lg border-none outline-none" placeholder="Search your products here"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        {searchQuery && (
+                            <div
+                                className={`w-full mx-auto h-96 bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
                             >
-                                <FaSearch size={20} />
-                            </button>
+                                {searchQuery && filteredProducts?.map((item) => (
+                                    <Link to={`/singleProduct/${item?._id}`}
+                                        key={item?._id}
+                                        className="max-w-[600px] h-28 bg-gray-100 mb-3 flex items-center gap-3"
+                                        onClick={() => {
+                                            dispatch(selectProduct(item));
+                                            setSearchQuery('')
+                                            setShowSearchBar(true)
 
-                        </div>
-                    </form>
-                </>
+                                        }}
+                                    >
+                                        <img className="w-24" src={`${SERVER_URL}/${item?.avatar?.replace(/\\/g, '/')}`} alt="productImg" />
+                                        <div className="flex flex-col gap-1">
+                                            <p className="font-semibold text-lg">
+                                                {item?.title}
+                                            </p>
+                                            <p className="text-xs">{item?.description}</p>
+                                            <p className="text-sm">
+                                                Price:{" "}
+                                                <span className="text-primeColor font-semibold">
+                                                    ${item?.price}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </Link>
+
+                                ))}
+                            </div>
+                        )}
+
+                    </div>
+                </form>
             </div>
             {/*--------------------middle section end-------------- */}
 
 
             {/*--------------------last section start-------------- */}
             <div className='flex flex-row gap-3 pr-10 cursor-pointer'>
-                <div className='relative z-20' onClick={() => setDetails2(!details2)}>
+                <div className='relative z-40' onClick={() => setDetails2(!details2)}>
                     <BsPersonFillDown className='' size={22} />
                     <div className={` absolute top-10 left-0 right-0 w-full ${details2 ? "block" : "hidden"} `}>
 
@@ -125,7 +166,7 @@ const Header = () => {
             </div>
             {/*--------------------last section end-------------- */}
 
-        </section>
+        </section >
     )
 }
 

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { RiLockPasswordFill } from "react-icons/ri"
+import { NavLink, useNavigate } from "react-router-dom";
 import LoginRegisterLeftSection from "./LoginRegisterLeftSection";
-import { AiFillEyeInvisible, AiFillEye, AiOutlineSend } from "react-icons/ai"
+import { AiOutlineSend } from "react-icons/ai"
 import { FiMail } from "react-icons/fi"
-import { toast } from 'react-toastify'
+import { SERVER_URL } from "../../constants";
+import Toast from "../../common/Toast";
+import axios from "axios";
 
 const SignIn = () => {
     const [changeScreen, setChangeScreen] = useState(true)
@@ -18,16 +19,40 @@ const SignIn = () => {
         otp: ""
     })
 
-    const sendOTPtoMail = (e) => {
-        e.preventDefault();
-        setChangeScreen(!changeScreen)
+    const handleInput = (e) => {
+        const { id, value } = e.target
+        setInitialData((preVal) => ({ ...preVal, [id]: value }))
     }
 
-    const enterOTP = (e) => {
-        e.preventDefault();
-        navigate("/changePassword")
+    const handleOtpInput = (e) => {
+        const { id, value } = e.target
+        setCredentials((preVal) => ({ ...preVal, [id]: value }))
     }
 
+    const sendOTPtoMail = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios?.post(`${SERVER_URL}/user/sendOTP`, initialData)
+            Toast(false, res?.data?.message)
+            setCredentials((prevCredentials) => ({ ...prevCredentials, email: initialData.email }))
+            setChangeScreen(!changeScreen)
+        } catch (err) {
+            Toast(true, err?.response?.data?.message)
+        }
+    }
+
+    const enterOTP = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(`${SERVER_URL}/user/verifyOTP`, credentials)
+            Toast(false, res.data.message)
+            localStorage.setItem("email", JSON.stringify(initialData.email))
+            navigate("/changePassword")
+        } catch (err) {
+            console.log(err)
+            Toast(true, err.response.data.message)
+        }
+    }
 
     return (
         <div className="w-full h-screen flex items-center justify-center font-titleFont">
@@ -36,7 +61,7 @@ const SignIn = () => {
 
             {/* -----------------------------------------RightSection----------------------------------------- */}
             <div className="w-full md:w-1/2 px-5 md:px-5">
-
+                {console.log(credentials)}
                 <form className="w-full lgl:w-[450px] h-screen flex flex-col items-center justify-center">
                     <div className="text-center mb-10">
                         <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-4xl  mb-4">Forget Password</h1>
@@ -54,19 +79,13 @@ const SignIn = () => {
                                         <FiMail />
                                     </div>
 
-                                    {changeScreen ?
-                                        <input type="email" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-gray-600 text-gray-900" placeholder="johnsmith@example.com"
-                                            id='email'
-                                            value={initialData.email}
-                                        // onChange={handleInput}
-                                        />
-                                        :
-                                        <input type="email" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-gray-600 text-gray-900" placeholder="johnsmith@example.com"
-                                            id='email'
-                                            value={credentials.email}
-                                        // onChange={handleInput}
-                                        />
-                                    }
+
+                                    <input type="email" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-gray-600 text-gray-900" placeholder="johnsmith@example.com"
+                                        id='email'
+                                        defaultValue={changeScreen ? initialData.email : credentials.email}
+                                        onChange={handleInput}
+                                        disabled={changeScreen ? false : true}
+                                    />
 
                                 </div>
                             </div>
@@ -84,12 +103,11 @@ const SignIn = () => {
                                             <AiOutlineSend />
                                         </div>
                                         <input type="text" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-gray-600 text-gray-900"
-                                            id='text'
+                                            id='otp'
                                             placeholder="4848"
-                                            value={credentials.otp}
-                                        // onChange={handleInput}
+                                            defaultValue={credentials.otp}
+                                            onChange={handleOtpInput}
                                         />
-
                                     </div>
                                 </div>
                             }
@@ -113,7 +131,7 @@ const SignIn = () => {
                             </div>
                         </div>
                         <div className="text-black text-center"> Have an account? <br />
-                            <NavLink to="/register" className='  hover:text-blue-600 duration-300 text-sm'>Sign in</NavLink>
+                            <NavLink to="/register" className='hover:text-blue-600 duration-300 text-sm'>Sign in</NavLink>
                         </div>
                     </div>
                 </form>

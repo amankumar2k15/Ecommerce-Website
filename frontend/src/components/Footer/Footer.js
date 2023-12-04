@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiLogoFacebookSquare, BiLogoLinkedinSquare, BiLogoGithub } from "react-icons/bi"
-import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 import paymentImg from "../../assets/paymentCard.png"
+import { useDispatch } from 'react-redux'
+import { fetchProducts, fetchProductsByCategory } from '../../store/productSlice'
 
 const Footer = () => {
+    const dispatch = useDispatch()
     const [handleEmail, setHandleEmail] = useState("")
     const [subscription, setSubscription] = useState(false)
     const accountItem = ["Profile", "Orders", "Addressess", "Account Details", "Payment Options"]
@@ -22,6 +24,18 @@ const Footer = () => {
         }
     }
 
+    //for categoryWise product
+    const handleCategoryClick = (categoryName) => {
+        if (categoryName === "All") {
+            dispatch(fetchProducts())
+        } else {
+            dispatch(fetchProductsByCategory(categoryName))
+        }
+        window.scrollTo({
+            behavior: "smooth",
+            top: 150
+        })
+    }
 
     return (
         <section className='footer'>
@@ -47,8 +61,11 @@ const Footer = () => {
                                 <ul>
                                     {menuItem.map((item, index) => {
                                         return (
-                                            <li key={index} className='text-[#767676] hover:text-primeColor text-[16px] font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center py-1 gap-2 hover:cursor-pointer pb-1 duration-300 w-full'>
-                                                <Link to="/shop">{item}</Link>
+                                            <li key={index} className='text-[#767676] hover:text-primeColor text-[16px] font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center py-1 gap-2 hover:cursor-pointer pb-1 duration-300 w-full'
+                                                onClick={() => handleCategoryClick(item)}
+
+                                            >
+                                                {item}
                                             </li>
                                         )
                                     })}

@@ -15,7 +15,7 @@ const App = () => {
     }
   }, [location, navigate]);
 
-  const homeWrapperRoutes = ["", "/", "/shop", "/about", "/contact", "/cart", "/wishlist"];
+  const homeWrapperRoutes = ["", "/", "/shop", "/about", "/contact", "/cart", "/wishlist", "/paymentgateway"];
   const isHomeRoute = location.pathname.startsWith('/singleProduct') || homeWrapperRoutes.includes(location.pathname);
 
   return (

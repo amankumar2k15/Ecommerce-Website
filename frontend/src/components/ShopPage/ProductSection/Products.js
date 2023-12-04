@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { STATUSES, fetchProducts, selectProduct } from '../../../store/productSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, addToWishlist } from "../../../store/cartSlice"
-import ErrorPage from '../../../Routes/ErrorPage'
+import ErrorPage from '../../../routes/ErrorPage'
 import { SERVER_URL } from '../../../constants'
 
 
@@ -97,9 +97,9 @@ const Products = () => {
         })}
       </div>
 
-      <div>
+      {/* <div>
         aman
-      </div>
+      </div> */}
     </>
   )
 }

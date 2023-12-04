@@ -16,7 +16,7 @@ const FooterBottom = () => {
 
                 </p>
             </div>
-        </div >
+        </div>
     );
 };
 

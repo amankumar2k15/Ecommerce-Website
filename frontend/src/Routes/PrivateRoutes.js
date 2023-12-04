@@ -6,8 +6,9 @@ import About from '../pages/About'
 import Contact from '../pages/Contact'
 import ErrorPage from './ErrorPage'
 import SingleProduct from "../components/ShopPage/SingleProductSection/SingleProduct"
-import Cart from '../pages/Cart/Cart'
+import Cart from '../pages/cart/Cart'
 import Wishlist from '../pages/Wishlist'
+import Payment from '../pages/payment/Payment'
 
 
 // import Loader from './loader/Loader'           // Logic for Loader
@@ -50,6 +51,7 @@ const PrivateRoutes = () => {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path='/singleProduct/:id' element={<SingleProduct />} />
+                <Route path='/paymentgateway' element={<Payment />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </>

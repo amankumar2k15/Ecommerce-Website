@@ -22,12 +22,12 @@ const Navbar = () => {
             <section className='navbar flex  z-50 bg-white shadow-testShadow md:shadow-none fixed md:left-0 top-0 right-0 w-full justify-between px-5 py-6'>
                 <div className='flex flex-col md:flex-row gap-6 md:gap-0 justify-between w-full'>
 
-                    <div className='font-dm-sans  text-white w-[200px] '>
+                    <div className='font-dm-sans flex justify-center items-center text-white w-[200px] '>
                         <img src={shopHubImg} alt='imgLogo' />
                     </div>
 
                     {/* -----List items----- && -----DropMenu----- */}
-                    <div className={`font-dm-sans pr-10  md:block ${hide ? "hidden" : "visible"}`}>
+                    <div className={`font-dm-sans pr-10  mdl:block ${hide ? "hidden" : "visible"}`}>
                         <ul className={` text-lg flex flex-col  md:flex-row gap-5   `}>
                             <li className=" flex justify-center md:border-[#66666] md:border-r-2 px-4 w-24 ">
                                 <Link
@@ -57,11 +57,8 @@ const Navbar = () => {
                     </div>
                 </div>
 
-
-
-
                 <button data-collapse-toggle="navbar-user" type="button"
-                    className="  items-center inline-flex md:hidden  p-2 w-10 h-10 justify-center text-sm text-black rounded-lg  focus:outline-none  dark:text-black-400  " aria-controls="navbar-user" aria-expanded="false"
+                    className="  items-center inline-flex mdl:hidden  p-2 w-10 h-10 justify-center text-sm text-black rounded-lg  focus:outline-none  dark:text-black-400  " aria-controls="navbar-user" aria-expanded="false"
                     onClick={() => setHide(!hide)}
                 >
                     {

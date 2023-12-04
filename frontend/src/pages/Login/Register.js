@@ -50,11 +50,11 @@ const Register = () => {
             try {
                 let res = await axios.post(`${SERVER_URL}/user/create-user`, initialData)
                 console.log(res)
-                Toast(false, "Sign up successfully")
+                Toast(false, res.data.message)
                 navigate("/login")
 
             } catch (error) {
-                console.log(error)
+                Toast(true, error.response.data.message)
             }
         } else {
             Toast(true, validation().message)
