@@ -1063,10 +1063,6 @@ video {
   width: 450px;
 }
 
-.w-\[500px\] {
-  width: 500px;
-}
-
 .w-\[80\%\] {
   width: 80%;
 }
@@ -2172,6 +2168,10 @@ video {
 
   .md\:w-52 {
     width: 13rem;
+  }
+
+  .md\:w-\[500px\] {
+    width: 500px;
   }
 
   .md\:grid-cols-2 {
