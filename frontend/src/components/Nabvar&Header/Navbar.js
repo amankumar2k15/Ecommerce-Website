@@ -27,9 +27,9 @@ const Navbar = () => {
                     </div>
 
                     {/* -----List items----- && -----DropMenu----- */}
-                    <div className={`font-dm-sans pr-10  mdl:block ${hide ? "hidden" : "visible"}`}>
-                        <ul className={` text-lg flex flex-col  md:flex-row gap-5   `}>
-                            <li className=" flex justify-center md:border-[#66666] md:border-r-2 px-4 w-24 ">
+                    <div className={`font-dm-sans pr-10 mdl:block ${hide ? "hidden" : "visible"}`}>
+                        <ul className={`text-lg flex flex-col md:flex-row gap-5`}>
+                            <li className="flex justify-center md:border-[#66666] md:border-r-2 px-4 w-24">
                                 <Link
                                     className={` ${currentPath === "/" ? "text-black font-semibold pb-1 border-black border-b-2 " : "md:text-textGray " ||
                                         currentPath === "/about" ? "text-black hover:font-semibold   hover:border-black hover:border-b-2" : "text-textGray" ||
