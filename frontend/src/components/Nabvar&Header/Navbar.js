@@ -45,6 +45,7 @@ const Navbar = () => {
                                     <li key={index} className=" w-24 flex justify-center md:border-[#66666] md:border-r-2 px-4 ">
                                         <Link
                                             to={item.to}
+                                            onClick={() => setHide(!hide)}
                                             className={`${currentPath === item.to ? " text-black font-semibold border-b-2 pb-1 border-black" : "md:text-textGray "}  text-black hover:text-black hover:font-semibold hover:border-b-2 hover:border-black  transition transform hover:scale-x-105`}
                                         >
                                             {item.text}
