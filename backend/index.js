@@ -22,7 +22,7 @@ app.use("/user", user)
 app.use("/category", category)
 app.use("/product", product)
 
-const PORT = process.enc.PORT || 8800
+const PORT = process.env.PORT || 8800
 
 
 // Connecting to Database
