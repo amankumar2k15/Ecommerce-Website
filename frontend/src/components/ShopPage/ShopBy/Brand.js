@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import NavTitle from "./NavTitle";
 import { useDispatch } from "react-redux";
@@ -7,13 +7,7 @@ import { fetchProducts, fetchProductsByBrand } from "../../../store/productSlice
 const Brand = () => {
     const dispatch = useDispatch()
     const [showBrands, setShowBrands] = useState(true);
-    const brands = [
-        { title: "Apple", },
-        { title: "Samsung", },
-        { title: "Canon", },
-        { title: "Lewis", },
-        { title: "All", },
-    ];
+    const brands = ["Apple", "Samsung", "Canon", "Lewis", "All",];
 
     const handleBrandClick = (brandName) => {
         if (brandName === "All") {
@@ -50,9 +44,9 @@ const Brand = () => {
                             <li
                                 key={index}
                                 className="border-b-[1px] border-b-[#F0F0F0] cursor-pointer pb-2 flex items-center gap-2 hover:text-primeColor hover:border-gray-400 duration-300"
-                                onClick={() => handleBrandClick(item.title)}
+                                onClick={() => handleBrandClick(item)}
                             >
-                                {item.title}
+                                {item}
                             </li>
                         ))}
                     </ul>

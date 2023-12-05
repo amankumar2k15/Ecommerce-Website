@@ -7,7 +7,7 @@ const { sendMail, sendOTP } = require("../Email/Email")
 
 const createUser = async (req, res) => {
     const user = req.body;
-    console.log(user)
+    // console.log(user)
 
     const salt = bcrypt.genSaltSync(+(process.env.SALT_ROUND))
     const hash = bcrypt.hashSync(user.password, salt);
@@ -77,7 +77,7 @@ const updateEcomUser = async (req, res) => {
         })
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         return res.status(500).json({ message: err.message })
     }
 }
@@ -151,7 +151,7 @@ const sendOtpToMail = async (req, res) => {
         })
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         return res.status(500).json({ message: err.message })
     }
 }
@@ -186,7 +186,7 @@ const verifyOTP = async (req, res) => {
         })
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         return res.status(500).json({ message: err.message })
     }
 }
@@ -212,7 +212,7 @@ const changePassword = async (req, res) => {
 
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         return res.status(500).json({ message: err.message })
     }
 }

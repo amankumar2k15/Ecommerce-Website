@@ -49,7 +49,7 @@ const SignIn = () => {
             localStorage.setItem("email", JSON.stringify(initialData.email))
             navigate("/changePassword")
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             Toast(true, err.response.data.message)
         }
     }
@@ -61,7 +61,6 @@ const SignIn = () => {
 
             {/* -----------------------------------------RightSection----------------------------------------- */}
             <div className="w-full md:w-1/2 px-5 md:px-5">
-                {console.log(credentials)}
                 <form className="w-full lgl:w-[450px] h-screen flex flex-col items-center justify-center">
                     <div className="text-center mb-10">
                         <h1 className="font-titleFont underline underline-offset-4 decoration-[1px] font-semibold text-4xl  mb-4">Forget Password</h1>

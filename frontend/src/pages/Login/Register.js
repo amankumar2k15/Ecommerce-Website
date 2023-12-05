@@ -49,7 +49,6 @@ const Register = () => {
         if (validation().isError) {
             try {
                 let res = await axios.post(`${SERVER_URL}/user/create-user`, initialData)
-                console.log(res)
                 Toast(false, res.data.message)
                 navigate("/login")
 

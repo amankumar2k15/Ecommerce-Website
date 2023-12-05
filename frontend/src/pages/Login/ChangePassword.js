@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RiLockPasswordFill } from "react-icons/ri"
 import LoginRegisterLeftSection from "./LoginRegisterLeftSection";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai"

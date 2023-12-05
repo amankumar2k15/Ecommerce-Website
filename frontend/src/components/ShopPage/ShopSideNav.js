@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi"
 import { RxCross2 } from "react-icons/rx"
 import Category from "./ShopBy/Category";

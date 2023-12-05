@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaShoppingCart } from "react-icons/fa"
-import { BsSuitHeartFill } from "react-icons/bs"
 import { ImCross } from "react-icons/im";
 import { MdOutlineLabelImportant } from "react-icons/md"
 import { SERVER_URL } from '../constants';
