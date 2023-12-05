@@ -22,13 +22,14 @@ app.use("/user", user)
 app.use("/category", category)
 app.use("/product", product)
 
+const PORT = process.enc.PORT || 8800
 
 
 // Connecting to Database
 mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         app.listen(process.env.PORT, function () {
-            console.log(`Server is running on PORT ${process.env.PORT}`)
+            console.log(`Server is running on PORT ${PORT}`)
             console.log("Connecting to Database")
         })
     }).catch((err) => console.log(err))
