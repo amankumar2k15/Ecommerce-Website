@@ -93,12 +93,12 @@ const Header = () => {
                         />
                         {searchQuery && (
                             <div
-                                className={`w-full mx-auto h-96 bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
+                                className={`w-full mx-auto h-96 bg-white top-16 absolute left-0 pl-4 pt-4 z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
                             >
                                 {searchQuery && filteredProducts?.map((item) => (
                                     <Link to={`/singleProduct/${item?._id}`}
                                         key={item?._id}
-                                        className="max-w-[600px] h-28 bg-gray-100 mb-3 flex items-center gap-3"
+                                        className="max-w-[600px] pl-4 bg-gray-100 mb-3 flex items-center gap-3"
                                         onClick={() => {
                                             dispatch(selectProduct(item));
                                             setSearchQuery('')
