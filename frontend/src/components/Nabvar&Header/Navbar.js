@@ -35,7 +35,9 @@ const Navbar = () => {
                                         currentPath === "/about" ? "text-black hover:font-semibold   hover:border-black hover:border-b-2" : "text-textGray" ||
                                             currentPath === "/shop" ? "text-textGray hover:font-semibold   hover:border-black hover:border-b-2 " : "text-textGray" ||
                                                 currentPath === "/contact" ? "text-textGray hover:font-semibold   hover:border-black hover:border-b-2" : "text-textGray"}   flex justify-center  transition transform  hover:scale-x-105`}
-                                    to="/">
+                                    to="/"
+                                    onClick={() => setHide(!hide)}
+                                >
                                     Home
                                 </Link>
                             </li>

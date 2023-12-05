@@ -12,7 +12,7 @@ const ContactForm = () => {
             <h1 className="font-titleFont font-semibold text-3xl">
                 Fill up a Form
             </h1>
-            <div className="w-[500px] h-auto py-6 flex flex-col gap-6">
+            <div className="md:w-[500px] h-auto py-6 flex flex-col gap-6">
                 <div>
                     <p className="text-base font-titleFont font-semibold px-2">Name</p>
                     <input className="w-full py-1 border-b-2 px-2 text-base font-medium placeholder:font-normal placeholder:text-sm outline-none focus-within:border-primeColor"
