@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { FaGripLines, FaSearch, FaShoppingCart } from "react-icons/fa"
+import { FaGripLines, FaShoppingCart } from "react-icons/fa"
 import { BsPersonFillDown } from "react-icons/bs"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, fetchProductsByCategory, searchProducts, selectProduct } from '../../store/productSlice'
+import { fetchProducts, fetchProductsByCategory, selectProduct } from '../../store/productSlice'
 import { SERVER_URL } from '../../constants'
 
 
@@ -13,7 +13,6 @@ const menuItems = ["Accessories", "Home Appliances", "Clothes", "Electronics", "
 
 
 const Header = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -33,7 +32,7 @@ const Header = () => {
             return item?.categoryName?.toLowerCase().includes(searchQuery.toLowerCase());
         })
         setFilteredProducts(filtered)
-    }, [searchQuery])
+    }, [searchQuery, reduxStoreProduct])
 
     // const handleSearchSubmit = (e) => {
     //     e.preventDefault();
@@ -81,7 +80,6 @@ const Header = () => {
 
             {/*--------------------middle section start-------------- */}
             <div className='w-full sm:w-[650px]'>
-                {/* Hello world */}
                 <form >
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-black sr-only ">
                         Search
@@ -102,7 +100,7 @@ const Header = () => {
                                         onClick={() => {
                                             dispatch(selectProduct(item));
                                             setSearchQuery('')
-                                            setShowSearchBar(true)
+                                            setShowSearchBar(!showSearchBar)
 
                                         }}
                                     >

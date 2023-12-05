@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BiLogoFacebookSquare, BiLogoLinkedinSquare, BiLogoGithub } from "react-icons/bi"
 import { motion } from "framer-motion"
 import paymentImg from "../../assets/paymentCard.png"
