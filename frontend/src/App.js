@@ -9,11 +9,11 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!location.pathname || location.pathname === "/") {
-      navigate("/");
-    }
-  }, [location, navigate]);
+  // useEffect(() => {
+  //   if (!location.pathname || location.pathname === "/") {
+  //     navigate("/");
+  //   }
+  // }, [location, navigate]);
 
   const homeWrapperRoutes = ["", "/", "/shop", "/about", "/contact", "/cart", "/wishlist", "/paymentgateway"];
   const isHomeRoute = location.pathname.startsWith('/singleProduct') || homeWrapperRoutes.includes(location.pathname);

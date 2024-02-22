@@ -4,7 +4,6 @@ require("dotenv").config();
 const UserModelEcom = require("../models/userModel")
 
 const check_Auth = async (req, res, next) => {
-
     try {
         const token = req.headers.authorization.split(" ")[1];
         jwt.verify(token, process.env.SECRET_KEY)

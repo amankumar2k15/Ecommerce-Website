@@ -13,9 +13,7 @@ const productSchema = mongoose.Schema({
     isnew: { type: Boolean, required: true, allowNull: true },
     brand: { type: String, required: true, allowNull: true },
     rating: { type: Number, required: true, allowNull: true },
-    avatar: {
-        type: String
-    },
+    avatar: { type: String },
 
 }, { timestamps: true });
 
@@ -30,7 +28,7 @@ productSchema.index({
 
 
 
-const ProductModelEcom = mongoose.model("ProductModelEcom", productSchema);
+const ProductsModelEcom = mongoose.model("ProductsModelEcom", productSchema);
 
-module.exports = ProductModelEcom
+module.exports = ProductsModelEcom
 

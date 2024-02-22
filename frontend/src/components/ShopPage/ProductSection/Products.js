@@ -40,7 +40,8 @@ const Products = () => {
             < div key={index} className='BoxComponent group w-full sm:w-[310px] my-5 bg-white ' >
               <div className='relative overflow-y-hidden flex items-center justify-center self-center'>
                 <div className='w-[250px] h-[260px] p-4 flex justify-center items-center '>
-                  <img className='object-cover' src={`${SERVER_URL}/${product?.avatar.replace(/\\/g, '/')}`} alt="ImgAvatar" />
+                  <img className='object-cover' src={`${product?.avatar}`} alt="ImgAvatar" />
+                  {/* <img className='object-cover' src={`${SERVER_URL}/${product?.avatar.replace(/\\/g, '/')}`} alt="ImgAvatar" /> */}
                 </div>
                 {/* -------hover top----- */}
                 <div className="absolute top-6 left-8">
@@ -92,7 +93,6 @@ const Products = () => {
                 <p className='px-2 text-textGray font-sm'>{product?.categoryName}</p>
               </div>
             </div>
-
           )
         })}
       </div>

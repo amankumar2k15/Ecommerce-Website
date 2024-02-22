@@ -62,9 +62,7 @@ const updateEcomUser = async (req, res) => {
             updatedUser.password = hash
         }
 
-        const findUser = await UserModelEcom.findOne({
-            _id: id
-        })
+        const findUser = await UserModelEcom.findOne({ _id: id })
         if (!findUser) {
             return res.status(400).json({ message: "User does not exist" })
         }

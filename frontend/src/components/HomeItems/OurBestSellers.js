@@ -33,7 +33,8 @@ const OurBestSellers = () => {
                                     <div key={item._id} className='BoxComponent group w-full sm:w-[310px] pb-5 '>
                                         <div className='relative overflow-y-hidden'>
                                             <div className='w-[250px] h-[250px] flex flex-col justify-center items-center p-8'>
-                                                <img className='object-cover ' src={`${SERVER_URL}/${item?.avatar.replace(/\\/g, '/')}`} alt="" />
+                                                <img className='object-cover' src={`${item?.avatar}`} alt="ImgAvatar" />
+                                                {/* <img className='object-cover ' src={`${SERVER_URL}/${item?.avatar.replace(/\\/g, '/')}`} alt="" /> */}
                                             </div>
                                             {/* -------hover top----- */}
                                             <div className="absolute top-6 left-8">

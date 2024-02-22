@@ -1,15 +1,28 @@
-const ProductModelEcom = require("../models/productModel")
+const ProductsModelEcom = require("../models/productModel")
+const { uploadImg } = require("../middleware/cloudinary");
 
 const createProduct = async (req, res) => {
     const product = req.body;
-    const newProduct = new ProductModelEcom(product);
+    const newProduct = new ProductsModelEcom(product);
 
     try {
-        if (!req.file) {
-            return res.status(500).json({ message: "Error is occuring when requesting a file" })
-        } else if (req.file) {
-            newProduct.avatar = req.file.path
+        // When only use multer ====>
+        // if (!req.file) {
+        //     return res.status(500).json({ message: "Error is occuring when requesting a file" })
+        // } else if (req.file) {
+        //     newProduct.avatar = req.file.path
+        // }
+        // When only use multer 
+
+
+        // When use cloudinary =====>
+        const uploadResult = await uploadImg(req.file.path, req.file.originalname);
+
+        if (!uploadResult.success) {
+            return res.status(500).json({ success: false, message: "Error uploading image" });
         }
+        newProduct.avatar = uploadResult.url;
+        // When use cloudinary 
 
         await newProduct.save()
         return res.status(201).json({
@@ -48,10 +61,9 @@ const getAllProduct = async (req, res) => {
             query.$text = { $search: req.query.searchQuery }
         }
 
-
         console.log("Query conditions:", query);
 
-        const product = await ProductModelEcom.find(query);
+        const product = await ProductsModelEcom.find(query);
         if (!product) {
             return res.status(400).json({ message: "Products does not found" })
         }
@@ -66,7 +78,7 @@ const getAllProduct = async (req, res) => {
     }
 }
 
-module.exports = { createProduct, getAllProduct } 
+module.exports = { createProduct, getAllProduct }
 
 
 // search API
@@ -90,7 +102,7 @@ module.exports = { createProduct, getAllProduct }
 //           _id: 1
 //         }
 //       ).limit(5)
-  
+
 //       return res.status(200).json(products)
 //     } catch (error) {
 //       console.log(error)
@@ -108,51 +120,51 @@ module.exports = { createProduct, getAllProduct }
 //     const qColor = req.query.color;
 //     const qSize = req.query.size;
 //     const qs = req.query.s;
-  
+
 //     try {
-//       let query = Product.find()
-  
-//       const filterArr = [];
-//       if (qs) filterArr.push({
-//         $or: [
-//           { "title": { $regex: qs, $options: "i" } },
-//           { "productno": { $regex: qs, $options: "i" } },
-//           { "desc": { $regex: qs, $options: "i" } },
-//           { "categories": { $in: [qs] } }
-//         ]
-//       })
-  
-//       if (qCategory) filterArr.push({ categories: { $in: [qCategory] } });
-//       if (qColor) filterArr.push({ color: { $in: [qColor] } });
-//       if (qSize) filterArr.push({ size: { $in: [qSize] } });
-//       if (filterArr.length !== 0) {
-//         query = query.find({ $and: filterArr });
-//       }
-  
-//       if (qsort === "Newest") {
-//         query.sort({ createdAt: -1 })
-//       } else if (qsort === "price-asc") {
-//         query.sort({ price: 1 })
-//       } else if (qsort === "price-desc") {
-//         query.sort({ price: -1 })
-//       } else if (qsort === "toppurchased") {
-//         query.sort({ purchasedCount: -1 })
-//       } else if (qsort === "topRated") {
-//         query.sort({ ratingsAverage: -1, ratingsQuantity: -1 })
-//       } else if (qsort === "topreviewed") {
-//         query.sort({ ratingsQuantity: -1 })
-//       }
-//       query.skip(startIndex).limit(limit)
-  
-//       const products = await query.exec()
-  
-//       if (products.length < 1) return res.status(404).json({ message: "No more product Found!" });
-  
-//       res.status(200).json(products);
-  
-  
+//         let query = Product.find()
+
+//         const filterArr = [];
+//         if (qs) filterArr.push({
+//             $or: [
+//                 { "title": { $regex: qs, $options: "i" } },
+//                 { "productno": { $regex: qs, $options: "i" } },
+//                 { "desc": { $regex: qs, $options: "i" } },
+//                 { "categories": { $in: [qs] } }
+//             ]
+//         })
+
+//         if (qCategory) filterArr.push({ categories: { $in: [qCategory] } });
+//         if (qColor) filterArr.push({ color: { $in: [qColor] } });
+//         if (qSize) filterArr.push({ size: { $in: [qSize] } });
+//         if (filterArr.length !== 0) {
+//             query = query.find({ $and: filterArr });
+//         }
+
+//         if (qsort === "Newest") {
+//             query.sort({ createdAt: -1 })
+//         } else if (qsort === "price-asc") {
+//             query.sort({ price: 1 })
+//         } else if (qsort === "price-desc") {
+//             query.sort({ price: -1 })
+//         } else if (qsort === "toppurchased") {
+//             query.sort({ purchasedCount: -1 })
+//         } else if (qsort === "topRated") {
+//             query.sort({ ratingsAverage: -1, ratingsQuantity: -1 })
+//         } else if (qsort === "topreviewed") {
+//             query.sort({ ratingsQuantity: -1 })
+//         }
+//         query.skip(startIndex).limit(limit)
+
+//         const products = await query.exec()
+
+//         if (products.length < 1) return res.status(404).json({ message: "No more product Found!" });
+
+//         res.status(200).json(products);
+
+
 //     } catch (error) {
-//       res.status(500).json({ message: "failed to get Product" });
+//         res.status(500).json({ message: "failed to get Product" });
 //     }
-  
-//   });
+
+// });

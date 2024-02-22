@@ -4,12 +4,19 @@ import { motion } from "framer-motion"
 import paymentImg from "../../assets/paymentCard.png"
 import { useDispatch } from 'react-redux'
 import { fetchProducts, fetchProductsByCategory } from '../../store/productSlice'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     const dispatch = useDispatch()
     const [handleEmail, setHandleEmail] = useState("")
     const [subscription, setSubscription] = useState(false)
-    const accountItem = ["Profile", "Orders", "Addressess", "Account Details", "Payment Options"]
+    const accountItem = [
+        { to: "/login", list: "Profile" },
+        { to: "/login", list: "Orders" },
+        { to: "/login", list: "Addressess" },
+        { to: "/login", list: "Account Details" },
+        { to: "/login", list: "Payment Options" },
+    ]
     const menuItem = ["Accessories", "Clothes", "Electronics", "Home appliances", "Jewellery",]
 
 
@@ -48,8 +55,12 @@ const Footer = () => {
                         <div>Explore ShopHub and discover not just products, but stories, values, and a commitment to excellence that makes online shopping not just easy, but also delightful.</div>
                         <div className='flex flex-row'>
                             <BiLogoFacebookSquare size={30} />
-                            <BiLogoLinkedinSquare size={30} />
-                            <BiLogoGithub size={30} />
+                            <a href='https://www.linkedin.com/in/amankumar1in/' target='_blank'>
+                                <BiLogoLinkedinSquare size={30} />
+                            </a>
+                            <a href='https://github.com/amankumar2k15' target='_blank'>
+                                <BiLogoGithub size={30} />
+                            </a>
                         </div>
                     </div>
 
@@ -72,16 +83,16 @@ const Footer = () => {
                                 </ul>
                             </div>
                         </div>
-
+                        s
                         <div className='flex flex-col gap-8'>
                             <p className=' text-xl font-semibold'>Your account</p>
                             <div>
                                 <ul>
                                     {accountItem.map((item, index) => {
                                         return (
-                                            <li key={index} className='text-[#767676] hover:text-primeColor text-[16px] font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center py-1 gap-2 hover:cursor-pointer pb-1 duration-300 w-full'>
-                                                {item}
-                                            </li>
+                                            <Link key={index} to={item?.to} className='text-[#767676] hover:text-primeColor text-[16px] font-normal border-b-[1px] border-b-gray-200 hover:border-b-primeColor flex items-center py-1 gap-2 hover:cursor-pointer pb-1 duration-300 w-full'>
+                                                {item?.list}
+                                            </Link>
                                         )
                                     })}
                                 </ul>

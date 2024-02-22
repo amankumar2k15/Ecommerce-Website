@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { FaGripLines, FaShoppingCart } from "react-icons/fa"
 import { BsPersonFillDown } from "react-icons/bs"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, fetchProductsByCategory, selectProduct } from '../../store/productSlice'
@@ -13,6 +13,7 @@ const menuItems = ["Accessories", "Home Appliances", "Clothes", "Electronics", "
 
 
 const Header = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -46,6 +47,7 @@ const Header = () => {
         } else {
             dispatch(fetchProductsByCategory(categoryName))
         }
+        navigate("/shop")
     }
 
     return (
@@ -164,7 +166,7 @@ const Header = () => {
             </div>
             {/*--------------------last section end-------------- */}
 
-        </section >
+        </section>
     )
 }
 

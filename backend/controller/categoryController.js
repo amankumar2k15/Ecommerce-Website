@@ -7,17 +7,14 @@ const createCategory = async (req, res) => {
     try {
         await newCategory.save();
 
-        return res.status(201).json({
-            message: "Category created successfully",
-            result: newCategory
-        })
+        return res.status(201).json({ message: "Category created successfully", result: newCategory })
 
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
 }
 
-const getAllCategory = async (req, res) => { 
+const getAllCategory = async (req, res) => {
 
     try {
         const category = await CategoryModelEcom.find({})

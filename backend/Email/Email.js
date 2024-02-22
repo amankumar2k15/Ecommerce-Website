@@ -58,8 +58,4 @@ function sendOTP(generateOTP, email) {
     })
 }
 
-
-
-
-
 module.exports = { sendMail, sendOTP }
