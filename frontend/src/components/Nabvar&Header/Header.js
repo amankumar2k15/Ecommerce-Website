@@ -6,13 +6,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, fetchProductsByCategory, selectProduct } from '../../store/productSlice'
-import { SERVER_URL } from '../../constants'
-
-
-const menuItems = ["Accessories", "Home Appliances", "Clothes", "Electronics", "Jewellery", "All"]
-
 
 const Header = () => {
+    const menuItems = ["Accessories", "Home Appliances", "Clothes", "Electronics", "Jewellery", "All"]
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [searchQuery, setSearchQuery] = useState("");
@@ -106,7 +102,8 @@ const Header = () => {
 
                                         }}
                                     >
-                                        <img className="w-24" src={`${SERVER_URL}/${item?.avatar?.replace(/\\/g, '/')}`} alt="productImg" />
+                                        <img className='w-24' src={`${item?.avatar}`} alt="productImg" />
+                                        {/* <img className="w-24" src={`${SERVER_URL}/${item?.avatar?.replace(/\\/g, '/')}`} alt="productImg" /> */}
                                         <div className="flex flex-col gap-1">
                                             <p className="font-semibold text-lg">
                                                 {item?.title}

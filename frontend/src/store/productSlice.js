@@ -19,7 +19,7 @@ const productSlice = createSlice({
     },
 
     reducers: {
-        selectProduct: (state, action) => {
+        selectProductselectProduct: (state, action) => {
             state.selectedProduct = action.payload;
             localStorage.setItem("selectedProduct", JSON.stringify(action.payload))
         }
@@ -81,9 +81,8 @@ const productSlice = createSlice({
     }
 })
 
-export const { selectProduct } = productSlice.actions
-export default productSlice.reducer;
 
+//Redux Thunk Middleware
 export const fetchProducts = createAsyncThunk("products/fetch", async () => {
     const res = await axios.get(`${SERVER_URL}/product/get-products`)
     const data = await res.data
@@ -114,3 +113,7 @@ export const searchProducts = createAsyncThunk("products/search", async (searchQ
     const data = await res.data;
     return data;
 });
+
+
+export const { selectProduct } = productSlice.actions
+export default productSlice.reducer;

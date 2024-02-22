@@ -41,8 +41,7 @@ const cartSlice = createSlice({
             state.wishlistItems = state.wishlistItems.filter(item => item._id !== action.payload)
             localStorage.setItem("wishlist", JSON.stringify(state.wishlistItems))
         },
-
-
+        
         clear(state, action) {
             state.items = [];
             localStorage.removeItem("cart")

@@ -61,7 +61,7 @@ const Navbar = () => {
 
                 <button data-collapse-toggle="navbar-user" type="button"
                     className="  items-center inline-flex mdl:hidden  p-2 w-10 h-10 justify-center text-sm text-black rounded-lg  focus:outline-none  dark:text-black-400  " aria-controls="navbar-user" aria-expanded="false"
-                    onClick={() => setHide(true)}
+                    onClick={() => setHide(!hide)}
                 >
                     {
                         hide ?

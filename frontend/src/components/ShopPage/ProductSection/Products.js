@@ -9,7 +9,7 @@ import { STATUSES, fetchProducts, selectProduct } from '../../../store/productSl
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, addToWishlist } from "../../../store/cartSlice"
 import ErrorPage from '../../../routes/ErrorPage'
-import { SERVER_URL } from '../../../constants'
+import CardSkeleton from '../../cardSkeleton/CardSkeleton'
 
 
 const Products = () => {
@@ -23,7 +23,7 @@ const Products = () => {
 
 
   if (status === STATUSES.LOADING) {
-    return <div className='flex justify-center text-4xl text-black mt-10'>Loading...</div>
+    return <CardSkeleton cards={29} />
   }
   if (status === STATUSES.ERROR) {
     return <ErrorPage />
@@ -31,16 +31,22 @@ const Products = () => {
 
   return (
     <>
-
-
       <div className="flex flex-row flex-wrap w-full pt-2 gap-1 justify-evenly bg-[#f5f5f3b8] ">
+
+        {!products &&
+
+          <div className='flex flex-row flex-wrap justify-evenly gap-4 '>
+            <CardSkeleton cards={29} />
+          </div>
+
+        }
 
         {products && products?.map((product, index) => {
           return (
             < div key={index} className='BoxComponent group w-full sm:w-[310px] my-5 bg-white ' >
               <div className='relative overflow-y-hidden flex items-center justify-center self-center'>
                 <div className='w-[250px] h-[260px] p-4 flex justify-center items-center '>
-                  <img className='object-cover' src={`${product?.avatar}`} alt="ImgAvatar" />
+                  <img className='object-cover' loading='lazy' src={`${product?.avatar}`} alt="ImgAvatar" />
                   {/* <img className='object-cover' src={`${SERVER_URL}/${product?.avatar.replace(/\\/g, '/')}`} alt="ImgAvatar" /> */}
                 </div>
                 {/* -------hover top----- */}

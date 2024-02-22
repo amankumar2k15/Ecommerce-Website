@@ -9,7 +9,7 @@ const Category = () => {
     const [showSubCatOne, setShowSubCatOne] = useState(false);
     const items = [
         { title: "Accessories", },
-        { title: "Home Appliances", icons: true, },
+        { title: "Home Appliances\"", icons: true, },
         { title: "Clothes" },
         { title: "Electronics", icons: true, },
         { title: "Jewellery", },
@@ -17,6 +17,7 @@ const Category = () => {
     ]
 
     const handleCategoryClick = (categoryName) => {
+        console.log(categoryName)
         if (categoryName === "All") {
             dispatch(fetchProducts())
         } else {

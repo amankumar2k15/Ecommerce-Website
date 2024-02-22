@@ -17,7 +17,7 @@ const Footer = () => {
         { to: "/login", list: "Account Details" },
         { to: "/login", list: "Payment Options" },
     ]
-    const menuItem = ["Accessories", "Clothes", "Electronics", "Home appliances", "Jewellery",]
+    const menuItem = ["Accessories", "Clothes", "Electronics", "Jewellery",]
 
 
     const handleSubscrible = (e) => {

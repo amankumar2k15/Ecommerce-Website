@@ -7,16 +7,15 @@ import { MdOutlineLabelImportant } from "react-icons/md"
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts, selectProduct } from '../../store/productSlice'
 import { addToCart, addToWishlist } from '../../store/cartSlice'
-import { SERVER_URL } from '../../constants'
-
+import CardSkeleton from '../cardSkeleton/CardSkeleton'
 
 const OurBestSellers = () => {
     const dispatch = useDispatch()
     const products = useSelector((state) => state.product.data.result) || []
 
-    useEffect(() => {
-        dispatch(fetchProducts())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(fetchProducts())
+    // }, [dispatch])
 
     return (
         <>
@@ -25,13 +24,13 @@ const OurBestSellers = () => {
                 <div className='flex flex-col md:flex-row justify-center gap-6 flex-wrap'>
                     {/*====================================> <BoxComponent /> <====================================== */}
                     {products.length === 0 ? (
-                        <div className='text-xl'>Loading...</div>
+                        <CardSkeleton cards={4} />
                     ) : (
                         products?.filter((item) => item.categoryName === "Clothes").slice(0, 4)
                             .map((item) => {
                                 return (
                                     <div key={item._id} className='BoxComponent group w-full sm:w-[310px] pb-5 '>
-                                        <div className='relative overflow-y-hidden'>
+                                        <div className='relative overflow-y-hidden flex justify-center items-center'>
                                             <div className='w-[250px] h-[250px] flex flex-col justify-center items-center p-8'>
                                                 <img className='object-cover' src={`${item?.avatar}`} alt="ImgAvatar" />
                                                 {/* <img className='object-cover ' src={`${SERVER_URL}/${item?.avatar.replace(/\\/g, '/')}`} alt="" /> */}
