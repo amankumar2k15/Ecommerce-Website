@@ -6,10 +6,10 @@ import Products from "../components/ShopPage/ProductSection/Products";
 
 const Shop = () => {
     const [hide, setHide] = useState(false)
-    const [itemsPerPage, setItemsPerPage] = useState(12);
-    const itemsPerPageFromBanner = (itemsPerPage) => {
-        setItemsPerPage(itemsPerPage);
-    };
+    // const [itemsPerPage, setItemsPerPage] = useState(12);
+    // const itemsPerPageFromBanner = (itemsPerPage) => {
+    //     setItemsPerPage(itemsPerPage);
+    // };
 
 
 
@@ -22,7 +22,7 @@ const Shop = () => {
                     <ShopSideNav toggleHide={() => setHide(!hide)} hide={hide} />
                 </div>
                 <div className={`w-full justify-between  ${hide ? "mdl:w-[100%]" : "mdl:w-full"} h-full flex flex-col gap-4`}>
-                    <ProductBanner itemsPerPageFromBanner={itemsPerPageFromBanner} />
+                    <ProductBanner />
                     <Products />
 
                 </div>

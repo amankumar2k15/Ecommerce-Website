@@ -1,7 +1,7 @@
 import React from "react";
 import { GoTriangleDown } from "react-icons/go";
 
-const ProductBanner = ({ itemsPerPageFromBanner }) => {
+const ProductBanner = () => {
 
     return (
         <div className="w-full flex flex-col md:flex-row md:items-center justify-end -z-10 ">

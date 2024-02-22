@@ -55,10 +55,10 @@ const Footer = () => {
                         <div>Explore ShopHub and discover not just products, but stories, values, and a commitment to excellence that makes online shopping not just easy, but also delightful.</div>
                         <div className='flex flex-row'>
                             <BiLogoFacebookSquare size={30} />
-                            <a href='https://www.linkedin.com/in/amankumar1in/' target='_blank'>
+                            <a href='https://www.linkedin.com/in/amankumar1in/' target='_blank' rel="noreferrer">
                                 <BiLogoLinkedinSquare size={30} />
                             </a>
-                            <a href='https://github.com/amankumar2k15' target='_blank'>
+                            <a href='https://github.com/amankumar2k15' target='_blank' rel="noreferrer">
                                 <BiLogoGithub size={30} />
                             </a>
                         </div>

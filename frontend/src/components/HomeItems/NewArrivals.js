@@ -28,7 +28,6 @@ const NewArrivals = () => {
                     {products.length === 0 ? (
                         <>
                             <CardSkeleton cards={4} />
-                            <div className='text-xl'>Loading...</div>
                         </>
                     ) : (
                         products?.filter((item) => item.isnew).slice(0, 4)

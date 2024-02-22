@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaShoppingCart } from "react-icons/fa"
 import { BsSuitHeartFill } from "react-icons/bs"
 import { MdOutlineLabelImportant } from "react-icons/md"
 //redux toolkit---react-redux
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, selectProduct } from '../../store/productSlice'
+import { selectProduct } from '../../store/productSlice'
 import { addToCart, addToWishlist } from '../../store/cartSlice'
 import CardSkeleton from '../cardSkeleton/CardSkeleton'
 
