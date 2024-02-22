@@ -40,7 +40,7 @@ const Footer = () => {
         }
         window.scrollTo({
             behavior: "smooth",
-            top: 150
+            top: 0
         })
     }
 
