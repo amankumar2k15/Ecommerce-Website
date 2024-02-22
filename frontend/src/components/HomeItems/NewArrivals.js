@@ -13,7 +13,6 @@ import CardSkeleton from '../cardSkeleton/CardSkeleton'
 const NewArrivals = () => {
     const dispatch = useDispatch()
     const products = useSelector((state) => state.product.data.result) || []
-    console.log("products from NewArrival=>", products)
 
     useEffect(() => {
         dispatch(fetchProducts())
@@ -29,6 +28,7 @@ const NewArrivals = () => {
                     {products.length === 0 ? (
                         <>
                             <CardSkeleton cards={4} />
+                            <div className='text-xl'>Loading...</div>
                         </>
                     ) : (
                         products?.filter((item) => item.isnew).slice(0, 4)

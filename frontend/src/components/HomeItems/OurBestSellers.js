@@ -21,7 +21,7 @@ const OurBestSellers = () => {
         <>
             <div className='py-10 px-5 flex flex-col gap-6 '>
                 <h2 className='font-extrabold  text-3xl'>Our Bestsellers</h2>
-                <div className='flex flex-col md:flex-row justify-center gap-6 flex-wrap'>
+                <div className='flex flex-col md:flex-row justify-center items-center gap-6 flex-wrap'>
                     {/*====================================> <BoxComponent /> <====================================== */}
                     {products.length === 0 ? (
                         <CardSkeleton cards={4} />

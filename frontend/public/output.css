@@ -1804,6 +1804,11 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-black {
+  --tw-shadow-color: #000;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -2015,6 +2020,14 @@ video {
 }
 
 @media (min-width: 375px) {
+  .sm\:block {
+    display: block;
+  }
+
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:w-1\/3 {
     width: 33.333333%;
   }
@@ -2029,6 +2042,10 @@ video {
 
   .sm\:w-\[650px\] {
     width: 650px;
+  }
+
+  .sm\:w-full {
+    width: 100%;
   }
 
   .sm\:flex-row {

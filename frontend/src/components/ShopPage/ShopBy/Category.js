@@ -17,7 +17,6 @@ const Category = () => {
     ]
 
     const handleCategoryClick = (categoryName) => {
-        console.log(categoryName)
         if (categoryName === "All") {
             dispatch(fetchProducts())
         } else {

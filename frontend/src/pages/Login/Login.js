@@ -43,7 +43,6 @@ const SignIn = () => {
           navigate("/")
         }
       } catch (err) {
-        // console.log(err)
         Toast(true, err.response.data.message)
       }
 

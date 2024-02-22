@@ -7,7 +7,7 @@ import { SERVER_URL } from "../../../constants";
 
 const SingleProduct = () => {
     const reduxProduct = useSelector((state) => state.product.selectedProduct)
-    // console.log(reduxProduct)
+
 
 
     return (

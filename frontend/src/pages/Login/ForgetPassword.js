@@ -49,7 +49,6 @@ const SignIn = () => {
             localStorage.setItem("email", JSON.stringify(initialData.email))
             navigate("/changePassword")
         } catch (err) {
-            // console.log(err)
             Toast(true, err.response.data.message)
         }
     }
