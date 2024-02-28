@@ -26,7 +26,19 @@ const PORT = process.env.PORT || 8800
 
 
 // Connecting to Database
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+
+// mongoose.connect(process.env.MONGODB_URL)
+//     .then(() => {
+//         app.listen(process.env.PORT, function () {
+//             console.log(`Server is running on PORT ${PORT}`)
+//             console.log("Connecting to Database")
+//         })
+//     }).catch((err) => console.log(err))
+
+
+// For Docker ====>
+// mongoose.connect(`mongodb://${process.env.USERNAME}:${process.env.PASSWORD}@mongodbcontainername:27017/test`)
+mongoose.connect(`mongodb+srv://amankumar2k15:amankumar2662@clustor0.9bcinws.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
         app.listen(process.env.PORT, function () {
             console.log(`Server is running on PORT ${PORT}`)
